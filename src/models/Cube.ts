@@ -118,7 +118,9 @@ export class Cube {
 
 	if (element_1 == "wood" && element_2 == "water") {
 		if( wood.isUsable() && water.isUsable() ){
-			this.updateMap();
+			if(wood.getLevel() > 2 && water.getLevel() > 2){
+				this.updateMap();
+			}
 			if(person.isUsable()){
 				const cur_state = this.cube_map[this.center_x][this.center_y+1];
 				if(cur_state == 1){
@@ -129,15 +131,23 @@ export class Cube {
 			}
 		}
 	}else if (element_1 == "person" && element_2 == "fire") {
-		const cur_state = this.cube_map[this.center_x][this.center_y];
+		let cur_state = this.cube_map[this.center_x][this.center_y];
+		this.fire_status = 0;
 		if( person.isUsable() && fire.isUsable() ){
 			if( cur_state == 2 ){
 				this.fire_status = 1;
+				fire.setUsable(false);
+			}else if(cur_state == 7 || cur_state == 8){
+				this.fire_status = 2;
+				fire.setUsable(false);
 			}else{
-				this.fire_status = 2;	
+				cur_state = this.cube_map[this.center_x][this.center_y+1];
+				if (cur_state == 1) {
+					this.cube_map[this.center_x][this.center_y+1] = 9;
+				} else if (cur_state == 2) {
+					this.cube_map[this.center_x][this.center_y+1] = 10;
+				}
 			}
-		}else{
-			this.fire_status = 0;
 		}
 	}
   }
