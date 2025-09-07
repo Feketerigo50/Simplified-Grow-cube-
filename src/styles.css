@@ -1,0 +1,55 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.map-container {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  background-image: url(".\\assets\\growcube2.png");
+  margin: 20px auto;
+}
+
+
+.map-row {
+  display: flex;
+}
+
+.map-cell {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  /* border: 1px solid #ccc; 可選 */
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+#person {
+  /* position: absolute; */
+  top: 250px;
+  left: 250px;
+  width: 50px;
+  animation: walk 10s linear; /*infinite;*/
+}
+
+@keyframes walk {
+  0% {
+    left: 50px;
+  }
+  50% {
+    left: 500px;
+  }
+  100% {
+    left: 300px;
+  }
+}
+
+
